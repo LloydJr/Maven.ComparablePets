@@ -5,38 +5,82 @@ import java.util.Scanner;
 
 public class Application {
 
-    void run(){
-
-    }
+    public static void main(String[] args) {
 
     Scanner scanner = new Scanner(System.in);
+    Integer amount = numberOfPets(scanner);
+    Pet[] pets = typeNamePet(scanner, amount);
+    System.out.println(petSpeaks(pets));
+}
 
-
-    private Integer numberOfPets(Scanner scanner){
-        System.out.println("How many pets do you own?");
-         return scanner.nextInt();
-    }
-    public static String petList(Integer numberOfPets, String[] typeOfPet, String[] nameOfPet) {
-        StringBuilder sb = new StringBuilder();
+    public static String petList(Integer numberOfPets, String[] typePet, String[] typeNamePet) {
+        StringBuilder results = new StringBuilder();
         for (int i = 0; i < numberOfPets; i++)
-            sb.append(String.format("%s %s \n", typeOfPet[i], nameOfPet[i]));
-        return sb.toString();
+            results.append(String.format("%s %s \n", typePet[i], typeNamePet[i]));
+        return results.toString();
     }
-    public static String petSpeaks(Pet[] pets){
-        StringBuilder sb = new StringBuilder();
+
+    public static String petSpeaks(Pet[] pets) {
+        StringBuilder results = new StringBuilder();
         for (Pet pet : pets)
-            sb.append(String.format("%s the %s says \n\t%s\n", pet.getName(), typeOfPetinString(pet), pet.speak()));
-        return sb.substring(0, sb.length() - 1);
+            results.append(String.format("%s the %s says\n\t%s\n", pet.getName(), typeOfPetInString(pet), pet.speak()));
+        return results.substring(0, results.length() - 1);
     }
-    private static String typeOfPetString(Pet pet) {
-        if (pet instanceof Cat)
+
+    private static Integer numberOfPets(Scanner scanner) {
+        System.out.println("How many pets do you own? ");
+        return scanner.nextInt();
+    }
+
+    private static String typeOfPetInString(Pet pet){
+        if(pet instanceof Cat) {
             return "cat";
-        else if (pet instanceof Dog)
+        }
+        else if (pet instanceof Dog) {
             return "dog";
+        }
         else
             return null;
     }
-    public static String typeAndNameOfPet(Pet pet0 {
 
+    private String typeAndNamePet(Scanner scanner, Integer amount) {
+
+        String[] typePet = new String[amount];
+        String[] namePet = new String[amount];
+
+        for (int i = 0; i < amount; i++) {
+            System.out.println("What kind of pet do you have? ");
+            typePet[i] = scanner.next();
+            System.out.println("What is the name of your pet? ");
+            namePet[i] = scanner.next();
+        }
+        return petList(amount, typePet, namePet);
+    }
+
+
+    private static Pet[] typeNamePet(Scanner scanner, Integer amount) {
+//        String[] typePet = new String[amount];
+//        String[] namePet = new String[amount];
+        Pet[] numberOfPets = new Pet[amount];
+
+        for (int i = 0; i < amount; i++) {
+            System.out.println("What kind of pet is it? ");
+            Pet pet = makePet(scanner.next());
+            System.out.println("What is the name of your pet? ");
+            assert pet != null;
+            pet.setName(scanner.next());
+            numberOfPets[i] = pet;
+        }
+        return numberOfPets;
+    }
+
+    private static Pet makePet(String typePet) {
+        if (typePet.equals("dog")) {
+            return new Dog();
+        } else if (typePet.equals("cat")) {
+            return new Cat();
+        } else {
+            return null;
+        }
     }
 }

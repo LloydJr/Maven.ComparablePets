@@ -13,4 +13,11 @@ public class Dog extends Pet{
     public String speak() {
         return "bark!";
     }
+
+    public int compareTo(Object o) {
+    }
+
+    public int compare(Object o1, Object o2) {
+        return 0;
+    }
 }

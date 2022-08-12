@@ -59,8 +59,6 @@ public class Application {
 
 
     private static Pet[] typeNamePet(Scanner scanner, Integer amount) {
-//        String[] typePet = new String[amount];
-//        String[] namePet = new String[amount];
         Pet[] numberOfPets = new Pet[amount];
 
         for (int i = 0; i < amount; i++) {
